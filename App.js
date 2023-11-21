@@ -57,7 +57,7 @@ export default function App() {
 				{locations.map((location, index) => (
 					<Marker key={index} coordinate={location.coordinates} title={location.name} />
 				))}
-				{userLocation && <Marker coordinate={userLocation} title="Your Location" pinColor="blue" />}
+				{userLocation && <Marker coordinate={userLocation} title="Your Location"/>}
 			</MapView>
 		</View>
 	);
