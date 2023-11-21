@@ -49,11 +49,10 @@ export default function App() {
 			<Text style={styles.title}>
 				<Text style={styles.titleText}>World Locations</Text>
 			</Text>
-
 			<ButtonGroup buttons={locations} moveLocation={moveLocation} />
-			<Button style={styles.buttonGroup} title={'Your Location'} onPress={requestLocationPermission} />
 
 			<View style={styles.separator}></View>
+
 			<MapView style={styles.map} region={region}>
 				{locations.map((location, index) => (
 					<Marker key={index} coordinate={location.coordinates} title={location.name} />
@@ -67,14 +66,27 @@ export default function App() {
 function ButtonGroup({ buttons, moveLocation }) {
 	return (
 		<View style={styles.buttonGroup}>
-			{buttons.map((location, index) => (
-				<Button
-					key={index}
-					title={`${location.name} | ${location.flag}`}
-					onPress={() => moveLocation(location.coordinates)}
-					buttonStyle={styles.button}
-				/>
-			))}
+			<View style={styles.columnContainer}>
+				{buttons.slice(0, 3).map((location, index) => (
+					<Button
+						key={index}
+						title={`${location.name} -> ${location.flag}`}
+						onPress={() => moveLocation(location.coordinates)}
+						buttonStyle={styles.button}
+					/>
+				))}
+			</View>
+
+			<View style={styles.columnContainer}>
+				{buttons.slice(3, 6).map((location, index) => (
+					<Button
+						key={index}
+						title={`${location.name} -> ${location.flag}`}
+						onPress={() => moveLocation(location.coordinates)}
+						buttonStyle={styles.button}
+					/>
+				))}
+			</View>
 		</View>
 	);
 }
@@ -97,7 +109,7 @@ const styles = StyleSheet.create({
 	titleText: {
 		fontSize: 28,
 		fontWeight: 'bold',
-		color: 'white',
+		color: '#FDB827',
 	},
 
 	separator: {
@@ -111,8 +123,13 @@ const styles = StyleSheet.create({
 	},
 
 	buttonGroup: {
-		flex: 1,
+		flex: 0.5,
 		alignItems: 'center',
+		flexDirection: 'row',
+	},
+
+	columnContainer: {
+		flex: 1,
 	},
 
 	button: {
@@ -121,5 +138,5 @@ const styles = StyleSheet.create({
 		borderWidth: 2,
 		borderColor: '#0F0F0F',
 		borderRadius: 9,
-	},
+	},  
 });
